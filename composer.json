@@ -1,0 +1,21 @@
+{
+    "name": "joe/gear4music",
+    "authors": [
+        {
+            "name": "Joe Reynolds",
+            "email": "joereynolds952@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GearForMusic\\": "src/"
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "scripts": {
+        "test": "phpunit test"
+    }
+}
