@@ -3,6 +3,8 @@
 namespace GearForMusic\Batch;
 
 use GearForMusic\Consignment\ConsignmentInterface;
+use GearForMusic\Courier\Anc;
+use GearForMusic\Courier\RoyalMail;
 
 class Batch implements BatchInterface
 {
@@ -10,7 +12,8 @@ class Batch implements BatchInterface
     private $consignments;
 
     /** @var array $sentConsignmentNumbers */
-    private $sentConsignmentNumbers;
+    public $sentConsignmentNumbers;
+
     /**
      * @param ConsignmentInterface[] $consignments
      */
@@ -20,15 +23,32 @@ class Batch implements BatchInterface
         $this->sentConsignmentNumbers = [];
     }
 
-    public function process()
+    public function start(): void
     {
         foreach($this->consignments as $consignment) {
             $this->sentConsignmentNumbers[$consignment->getNumber()] = $consignment;
         }
     }
 
-    public function end()
+    public function end(): void
     {
+        $royalMail = new RoyalMail();
+        $anc = new Anc();
+
+        $royalMailConsignmentNumbers = [];
+        $ancConsignmentNumbers = [];
+
+        foreach($this->sentConsignmentNumbers as $consignmentNumber => $consignment) {
+            if (is_a($consignment->getCourier(), RoyalMail::class)) {
+                $royalMailConsignmentNumbers[] = $consignmentNumber;
+            }
+            if (is_a($consignment->getCourier(), Anc::class)) {
+                $ancConsignmentNumbers[] = $consignmentNumber;
+            }
+        }
+
+        $royalMail->sendConsignmentNumbers($royalMailConsignmentNumbers);
+        $anc->sendConsignmentNumbers($ancConsignmentNumbers);
     }
 
     public function addConsignment(ConsignmentInterface $consignment): void
