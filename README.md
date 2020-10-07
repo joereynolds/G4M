@@ -11,7 +11,7 @@
   consignment numbers but it's been done in a way that allows each courier to
   have its own method of data transport
 
-- I'm omitted `@param` annotations where there is enough information in the function's
+- I've omitted `@param` annotations where there is enough information in the function's
   signature to avoid duplication and redundancy
 
 - Locally I have php 7.2 but ideally I'd be on 7.4 which would allow me to type
