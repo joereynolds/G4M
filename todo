@@ -1,7 +1,0 @@
-- Write a test that asserts the courier's prefix is added to the consignment number
-- Not a fan of `getNumber` returning a string, I suppose I could have called it `getIdentifier` but I didn't want to deviate from the spec
-
-
-
-- I've chosen to only document what is needed. I.e. if something is type hinted in the method itself, I've omitted it from being included in a docblock since it's redundant
-- Although we're sending an array of consignment numbers in `sendConsignmentNumbers`, I would have preferred to send the `Consignment` object itself so we're exposing less of the inner workings of the data.

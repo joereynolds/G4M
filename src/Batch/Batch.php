@@ -12,12 +12,12 @@ class Batch implements BatchInterface
     private $consignments;
 
     /** @var array $sentConsignmentNumbers */
-    public $sentConsignmentNumbers;
+    private $sentConsignmentNumbers;
 
     /**
      * @param ConsignmentInterface[] $consignments
      */
-    public function __construct(array $consignments)
+    public function __construct(array $consignments = [])
     {
         $this->consignments = $consignments;
         $this->sentConsignmentNumbers = [];
@@ -49,6 +49,14 @@ class Batch implements BatchInterface
 
         $royalMail->sendConsignmentNumbers($royalMailConsignmentNumbers);
         $anc->sendConsignmentNumbers($ancConsignmentNumbers);
+    }
+
+    /**
+     * @return ConsignmentInterface[]
+     */
+    public function getConsignments(): array
+    {
+        return $this->consignments;
     }
 
     public function addConsignment(ConsignmentInterface $consignment): void
